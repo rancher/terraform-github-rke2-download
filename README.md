@@ -31,7 +31,7 @@ For simplicity we use the `GITHUB_TOKEN` environment variable when testing.
 
 The specific use case for the example modules is temporary infrastructure for testing purposes.
 With that in mind, it is not expected that we manage the resources as a team, therefore the state files are all stored locally.
-If you would like to store the state files remotely, add a terraform backend file (`*.name.tfbackend`) to your implementation module.
+If you would like to store your state files remotely, add a terraform backend file (`*.name.tfbackend`) to your implementation module.
 https://www.terraform.io/language/settings/backends/configuration#file
 
 ## Development and Testing
