@@ -1,0 +1,57 @@
+name: 'Testing'
+
+on:
+  pull_request:
+    branches:
+    - main 
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.5.5
+        with_wrapper: false
+
+    - name: Init Basic
+      run: cd examples/basic && terraform init -upgrade
+
+    - name: Validate Basic
+      run: cd examples/basic && terraform validate
+
+  tflint:
+    name: 'TFLint'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: terraform-linters/setup-tflint@v3
+      name: Setup TFLint
+      with:
+        tflint_version: latest
+
+    - name: Show version
+      run: tflint --version
+
+    - name: Init TFLint
+      run: tflint --init
+
+    - name: Run TFLint
+      run: tflint -f compact
+
+  terratest:
+    name: 'Terratest'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Run Terratest
+      run: cd ./tests && go test -v -timeout 10m -parallel 10
