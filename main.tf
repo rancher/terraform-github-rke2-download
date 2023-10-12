@@ -11,7 +11,7 @@ locals {
   install_url     = "https://raw.githubusercontent.com/rancher/rke2/master/install.sh"
   rpm_os          = (local.os == "rhel" ? "centos" : local.os)
   rpm_arch        = (local.arch == "amd64" ? "x86_64" : local.arch)
-  rpm_url         = "https://rpm.rancher.io/rke2/stable/${local.kube}/${local.os}/${local.os_version}"
+  rpm_url         = "https://rpm.rancher.io/rke2/stable/${local.kube}/${local.rpm_os}/${local.os_version}"
   rpm_release     = (local.latest ? "" : "${local.sem[0]}.${local.sem[1]}.${local.sem[2]}~rke2r1-0.el${local.os_version}.${local.arch}")
   selected_assets = (can(data.github_release.selected[0].assets) ? { for a in data.github_release.selected[0].assets : a.name => a.browser_download_url } : {})
   latest_assets   = (can(data.github_release.latest.assets) ? { for a in data.github_release.latest.assets : a.name => a.browser_download_url } : {})
