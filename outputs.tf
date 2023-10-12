@@ -7,7 +7,7 @@ output "assets" {
 output "files" {
   value       = local.files
   description = <<-EOT
-    A list of the files to download.
+    A list of the files downloaded and their URLs.
   EOT
 }
 output "tag" {

@@ -3,8 +3,9 @@ locals {
   rpm             = var.rpm
   release         = var.release
   latest          = (var.release == "latest" ? true : false)
-  sem             = (local.latest ? [] : regex("v([0-9]+)\\.([0-9]+)\\.([0-9]+)", var.release)) # extracts the semver from the release string
-  kube            = (local.latest ? "" : "${local.sem[0]}.${local.sem[1]}")                     # build the major.minor version of kubernetes
+  release_tag     = (local.latest ? data.github_release.latest.release_tag : var.release)
+  sem             = regex("v([0-9]+)\\.([0-9]+)\\.([0-9]+)", local.release_tag) # extracts the semver from the release string
+  kube            = "${local.sem[0]}.${local.sem[1]}"                           # build the major.minor version of kubernetes
   arch            = var.arch
   os              = (local.rpm ? var.os : "")         # should be rhel, but should only be used when downloading RPMs
   os_version      = (local.rpm ? var.os_version : "") # should only be used when downloading RPMs
@@ -12,7 +13,7 @@ locals {
   rpm_os          = (local.os == "rhel" ? "centos" : local.os)
   rpm_arch        = (local.arch == "amd64" ? "x86_64" : local.arch)
   rpm_url         = "https://rpm.rancher.io/rke2/stable/${local.kube}/${local.rpm_os}/${local.os_version}"
-  rpm_release     = (local.latest ? "" : "${local.sem[0]}.${local.sem[1]}.${local.sem[2]}~rke2r1-0.el${local.os_version}.${local.arch}")
+  rpm_release     = "${local.sem[0]}.${local.sem[1]}.${local.sem[2]}~rke2r1-0.el${local.os_version}.${local.arch}"
   selected_assets = (can(data.github_release.selected[0].assets) ? { for a in data.github_release.selected[0].assets : a.name => a.browser_download_url } : {})
   latest_assets   = (can(data.github_release.latest.assets) ? { for a in data.github_release.latest.assets : a.name => a.browser_download_url } : {})
   assets          = (local.latest ? local.latest_assets : local.selected_assets)
