@@ -4,10 +4,66 @@ WARNING! this module is experimental
 
 This module downloads the proper files from the RKE2 release specified and names them appropriately for the install script.
 
-## File Path
+## Usage
 
-The `file_path` variable informs the module where to put the files.
-If left empty it will place them in a new "rke2" directory in the root module directory.
+```hcl
+module "download_latest" {
+  source  = "rancher/rke2-download/github"
+  version = "v0.0.2"
+  release = "latest"
+}
+```
+
+## Requirements
+
+| Name                              | Version         |
+| --------------------------------- | --------------- |
+| [terraform](#requirement\_terraform) | >= 1.1.0, < 1.6 |
+| [github](#requirement\_github)       | >= 5.32.0       |
+| [local](#requirement\_local)         | >= 2.4.0        |
+| [null](#requirement\_null)           | >= 3.2.0        |
+
+## Providers
+
+| Name                     | Version   |
+| ------------------------ | --------- |
+| [github](#provider\_github) | >= 5.32.0 |
+| [local](#provider\_local)   | >= 2.4.0  |
+| [null](#provider\_null)     | >= 3.2.0  |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name                                                                                                                 | Type        |
+| -------------------------------------------------------------------------------------------------------------------- | ----------- |
+| [local_file.download_dir](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)           | resource    |
+| [null_resource.download](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource)         | resource    |
+| [github_release.latest](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/release)   | data source |
+| [github_release.selected](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/release) | data source |
+
+## Inputs
+
+|              Name              | Description                                                                                                                                                                                                                                                                                                                                                                     | Type       | Default      | Required |
+| :-----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------ | :------: |
+|        [arch](#input\_arch)        | The architecture of the system to download for.`<br>`Valid values are amd64 (for any x86\_64), arm64, or s390x.                                                                                                                                                                                                                                                               | `string` | `"amd64"`  |    no    |
+|          [os](#input\_os)          | The OS to download RPMs for.`<br>`This is only used for RPM downloads.`<br>`This is ignored when rpm is false.                                                                                                                                                                                                                                                              | `string` | `"rhel"`   |    no    |
+| [os\_version](#input\_os\_version) | The version of RHEL to download RPMs for.`<br>`This is only used for RPM downloads.`<br>`This is ignored when rpm is false.                                                                                                                                                                                                                                                 | `string` | `"8"`      |    no    |
+|        [path](#input\_path)        | The path to download the files to.`<br>`If not specified, the files will be downloaded to a directory named "rke2" in the root of the module.                                                                                                                                                                                                                                 | `string` | `"./rke2"` |    no    |
+|     [release](#input\_release)     | The value of the git tag associated with the release to find.`<br>`Specify "latest" to find the latest release (default).`<br>`When downloading RPMs, this must be a specific release, not "latest".                                                                                                                                                                        | `string` | `"latest"` |    no    |
+|         [rpm](#input\_rpm)         | Whether or not to download the RPMs.`<br>`Defaults to false.`<br>`This option requires that the system is linux (specifically RHEL based) and the architecture is amd64(x86\_64).`<br>`This option requires the computer running terraform to have curl installed.`<br>`When using this option, the "release" variable must be set to a specific release, not "latest". | `bool`   | `false`    |    no    |
+|      [system](#input\_system)      | The kernel of the system to download for.`<br>`Valid values are currently just linux (the default).                                                                                                                                                                                                                                                                           | `string` | `"linux"`  |    no    |
+
+## Outputs
+
+| Name                   | Description                                              |
+| ---------------------- | -------------------------------------------------------- |
+| [assets](#output\_assets) | A list of the assets found in the GitHub release object. |
+| [files](#output\_files)   | A list of the files to download.                         |
+| [path](#output\_path)     | The path where the files were downloaded to.             |
+| [tag](#output\_tag)       | The tag of the release that was found.                   |
 
 ## Curl and Local Filesystem Write Access
 
@@ -15,10 +71,6 @@ This module downloads files to your local filesystem (not a remote machine) usin
 This means you will need write (and read) access to your local filesystem and you will need Curl installed.
 You will generally need 2GB of storage space available.
 You will also need to have a GitHub token, see [GitHub Access](#github-access) below.
-
-## Release
-
-This is the version of rke2 to install, even when supplying the files it is necessary to specify the exact version of rke2 you are installing.
 
 ## GitHub Access
 

@@ -39,6 +39,7 @@
             terraform
             tflint
             tfsec
+            terraform-docs
           ];
           shellHook = ''
             source .envrc
