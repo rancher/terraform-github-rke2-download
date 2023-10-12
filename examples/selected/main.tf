@@ -2,7 +2,7 @@ locals {
   version = var.release
   path    = var.path
 }
-module "TestSelected" {
+module "download_selected" {
   source  = "../../"
   release = local.version
   path    = local.path

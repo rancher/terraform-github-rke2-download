@@ -1,9 +1,9 @@
 output "tag" {
-  value = module.TestSelected.tag
+  value = module.download_selected.tag
 }
 output "path" {
-  value = module.TestSelected.path
+  value = module.download_selected.path
 }
 output "files" {
-  value = module.TestSelected.files
+  value = module.download_selected.files
 }
