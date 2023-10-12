@@ -1,9 +1,9 @@
 output "tag" {
-  value = module.TestBasic.tag
+  value = module.download_latest.tag
 }
 output "path" {
-  value = module.TestBasic.path
+  value = module.download_latest.path
 }
 output "files" {
-  value = module.TestBasic.files
+  value = module.download_latest.files
 }

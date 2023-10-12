@@ -7,8 +7,8 @@ override.*
 !terraform.md
 rke2*
 *.gz
-examples/*/installer.sh
-examples/*/sha256sum.txt
+examples/*/install.*
+examples/*/sha256sum*
 examples/*/tmp
 examples/*/rke2
 id_ed25519_*
