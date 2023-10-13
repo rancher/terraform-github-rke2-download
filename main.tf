@@ -3,7 +3,6 @@ locals {
   arch        = var.arch
   release     = var.release
   latest      = (var.release == "latest" ? true : false)
-  release_tag = (local.latest ? data.github_release.latest.release_tag : var.release)
   install_url = "https://raw.githubusercontent.com/rancher/rke2/master/install.sh"
   path        = abspath(var.path)
 
