@@ -43,7 +43,7 @@ No modules.
 | [null_resource.download](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource)         | resource    |
 | [github_release.latest](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/release)   | data source |
 | [github_release.selected](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/release) | data source |
-
+vscode-file://vscode-app/Applications/Visual%2520Studio%2520Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html
 ## Inputs
 
 |              Name              | Description                                                                                                                                                                                                                                                                                                                                                                     | Type       | Default      | Required |
