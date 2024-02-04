@@ -2,7 +2,7 @@
 
 WARNING! this module is experimental
 
-This module downloads the proper files from the RKE2 release specified and names them appropriately for the install script.
+This module downloads the proper files from the RKE2 release specified and names them appropriately for the install script. The download can be retriggered again by changing the release var.
 
 ## Usage
 

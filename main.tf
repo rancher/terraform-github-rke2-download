@@ -56,7 +56,10 @@ resource "null_resource" "download" {
   for_each = local.files
   provisioner "local-exec" {
     command = <<-EOT
-      curl -L -s -o ${abspath("${local.path}/${each.key}")} ${each.value}
+      curl -L -s > ${abspath("${local.path}/${each.key}")} ${each.value}
     EOT
+  }
+  triggers = {
+    release = var.release
   }
 }
