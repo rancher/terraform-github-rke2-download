@@ -9,7 +9,8 @@ import (
 func TestSelected(t *testing.T) {
 	t.Parallel()
 	directory := "selected"
-	release := getLatestRelease(t, "rancher", "rke2")
+	release := "v1.28.5+rke2r1"
+
 	terraformVars := map[string]interface{}{
 		"release": release,
 		"path":    "./rke2",
@@ -19,4 +20,11 @@ func TestSelected(t *testing.T) {
 	defer teardown(t, directory)
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApply(t, terraformOptions)
+	newRelease := getLatestRelease(t, "rancher", "rke2")
+	newTerraformVars := map[string]interface{}{
+		"release": newRelease,
+		"path":    "./rke2",
+	}
+	newTerraformOptions := setup(t, directory, newTerraformVars)
+	terraform.InitAndApply(t, newTerraformOptions)
 }
