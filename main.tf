@@ -47,16 +47,17 @@ resource "local_file" "download_dir" {
 }
 
 # requires curl to be installed in the environment running terraform
-resource "null_resource" "download" {
+resource "terraform_data" "download" {
   depends_on = [
     data.github_release.selected,
     data.github_release.latest,
     local_file.download_dir,
   ]
-  for_each = local.files
+  for_each         = local.files
+  triggers_replace = each.value
   provisioner "local-exec" {
     command = <<-EOT
-      curl -L -s -o ${abspath("${local.path}/${each.key}")} ${each.value}
+      curl --clobber -L -s -o ${"${local.path}/${each.key}"} ${each.value}
     EOT
   }
 }

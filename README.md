@@ -1,8 +1,7 @@
 # Terraform RKE2 Download
 
-WARNING! this module is experimental
-
 This module downloads the proper files from the RKE2 release specified and names them appropriately for the install script.
+The download can be retriggered by changing the release variable.
 
 ## Usage
 
