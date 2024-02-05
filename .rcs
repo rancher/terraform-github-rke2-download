@@ -1,1 +1,2 @@
-source ~/.config/github/default/rc
+source ~/.config/github/default/rc # add personal github auth vars
+source ~/.config/alias/default/rc # add personal aliases
