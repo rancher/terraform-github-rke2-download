@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/rancher/terraform-github-rke2-download/compare/v0.1.0...v0.1.1) (2024-02-09)
+
+
+### Bug Fixes
+
+* update the tf req to the latest open source version ([#12](https://github.com/rancher/terraform-github-rke2-download/issues/12)) ([9927ce6](https://github.com/rancher/terraform-github-rke2-download/commit/9927ce6f25f72b51461f50e9086c4b2bd98182fd))
+
 ## [0.1.0](https://github.com/rancher/terraform-github-rke2-download/compare/v0.0.3...v0.1.0) (2024-02-05)
 
 
