@@ -1,9 +1,10 @@
-package test
+package basic
 
 import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
+  util "github.com/rancher/terraform-github-rke2-install/test/tests"
 )
 
 func TestBasic(t *testing.T) {
@@ -14,9 +15,9 @@ func TestBasic(t *testing.T) {
 	// 	"release": release,
 	// }
 	terraformVars := map[string]interface{}{}
-	terraformOptions := setup(t, directory, terraformVars)
+	terraformOptions := util.Setup(t, directory, terraformVars)
 
-	defer teardown(t, directory)
+	defer util.Teardown(t, directory)
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApply(t, terraformOptions)
 }
