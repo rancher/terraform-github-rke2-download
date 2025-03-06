@@ -1,9 +1,10 @@
-package test
+package selected
 
 import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
+  util "github.com/rancher/terraform-github-rke2-install/test/tests"
 )
 
 func TestSelected(t *testing.T) {
@@ -15,16 +16,16 @@ func TestSelected(t *testing.T) {
 		"release": release,
 		"path":    "./rke2",
 	}
-	terraformOptions := setup(t, directory, terraformVars)
+	terraformOptions := util.Setup(t, directory, terraformVars)
 
-	defer teardown(t, directory)
+	defer util.Teardown(t, directory)
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApply(t, terraformOptions)
-	newRelease := getLatestRelease(t, "rancher", "rke2")
+	newRelease := util.GetLatestRelease(t, "rancher", "rke2")
 	newTerraformVars := map[string]interface{}{
 		"release": newRelease,
 		"path":    "./rke2",
 	}
-	newTerraformOptions := setup(t, directory, newTerraformVars)
+	newTerraformOptions := util.Setup(t, directory, newTerraformVars)
 	terraform.InitAndApply(t, newTerraformOptions)
 }
