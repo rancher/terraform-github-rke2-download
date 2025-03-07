@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.2](https://github.com/rancher/terraform-github-rke2-download/compare/v0.1.1...v0.1.2) (2025-03-07)
+
+
+### Bug Fixes
+
+* remove amazon from release ([#16](https://github.com/rancher/terraform-github-rke2-download/issues/16)) ([151fc14](https://github.com/rancher/terraform-github-rke2-download/commit/151fc14e13ce061ab5311d3e9b9e00576db408ee))
+* update version constraint and environment ([#14](https://github.com/rancher/terraform-github-rke2-download/issues/14)) ([6493f24](https://github.com/rancher/terraform-github-rke2-download/commit/6493f240debf2b46f97ec53215ea8173b5534122))
+
 ## [0.1.1](https://github.com/rancher/terraform-github-rke2-download/compare/v0.1.0...v0.1.1) (2024-02-09)
 
 
