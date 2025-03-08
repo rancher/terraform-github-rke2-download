@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/rancher/terraform-github-rke2-download/compare/v0.1.2...v1.0.0) (2025-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* update read me ([#18](https://github.com/rancher/terraform-github-rke2-download/issues/18))
+
+### Bug Fixes
+
+* update read me ([#18](https://github.com/rancher/terraform-github-rke2-download/issues/18)) ([b5d27b6](https://github.com/rancher/terraform-github-rke2-download/commit/b5d27b6b107a56d47892479d9756a66f6c04bee1))
+
 ## [0.1.2](https://github.com/rancher/terraform-github-rke2-download/compare/v0.1.1...v0.1.2) (2025-03-07)
 
 
