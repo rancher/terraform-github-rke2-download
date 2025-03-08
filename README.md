@@ -8,7 +8,7 @@ The download can be triggered again by changing the release variable.
 ```hcl
 module "download_latest" {
   source  = "rancher/rke2-download/github"
-  version = "v0.0.2"
+  version = "v1.0.0"
   release = "latest"
 }
 ```
@@ -97,12 +97,8 @@ It is important to us that all collaborators have the ability to develop in simi
 These tools are not necessary, but they can make it much simpler to collaborate.
 
 * I use [nix](https://nixos.org/) that I have installed using [their recommended script](https://nixos.org/download.html#nix-install-macos)
-* I use [direnv](https://direnv.net/) that I have installed using brew.
-* I simply use `direnv allow` to enter the environment
-* I navigate to the `tests` directory and run `go test -v -timeout=5m -parallel=10`
-* To run an individual test I navigate to the `tests` directory and run `go test -v -timeout=5m -run <test function name>`
-  * eg. `go test -v -timeout=5m -run TestBasic`
-* I use `override.tf` files to change the values of `examples` to personalized data so that I can run them.
+* I simply `source .envrc` to enter the environment
+* To run tests I run the `run_tests.sh` script
 * I store my GitHub credentials in a local file and generate a symlink to them named `~/.config/github/default/rc`
   * this will be automatically sourced when you enter the nix environment (and unloaded when you leave)
 
