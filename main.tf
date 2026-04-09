@@ -3,12 +3,15 @@ locals {
   arch        = var.arch
   release     = var.release
   latest      = (var.release == "latest" ? true : false)
-  install_url = "https://raw.githubusercontent.com/rancher/rke2/master/install.sh"
+  latest_url  = "https://raw.githubusercontent.com/rancher/rke2/master/install.sh"
+  release_url = "https://raw.githubusercontent.com/rancher/rke2/refs/tags/${urlencode(local.release)}/install.sh"
+  install_url = local.latest ? local.latest_url : local.release_url
   path        = abspath(var.path)
 
   selected_assets = (can(data.github_release.selected[0].assets) ? { for a in data.github_release.selected[0].assets : a.name => a.browser_download_url } : {})
   latest_assets   = (can(data.github_release.latest.assets) ? { for a in data.github_release.latest.assets : a.name => a.browser_download_url } : {})
   assets          = (local.latest ? local.latest_assets : local.selected_assets)
+
   files = {
     "rke2-images.${local.system}-${local.arch}.tar.gz" = local.assets["rke2-images.${local.system}-${local.arch}.tar.gz"],
     "rke2.${local.system}-${local.arch}.tar.gz"        = local.assets["rke2.${local.system}-${local.arch}.tar.gz"],
@@ -57,6 +60,7 @@ resource "terraform_data" "download" {
   triggers_replace = each.value
   provisioner "local-exec" {
     command = <<-EOT
+      # we are only downloading here and the checksum is downloaded as well
       curl --clobber -L -s -o ${"${local.path}/${each.key}"} ${each.value}
     EOT
   }
