@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.0...v1.0.1) (2026-04-15)
+
+
+### Bug Fixes
+
+* Add FOSSA scanning workflow ([#20](https://github.com/rancher/terraform-github-rke2-download/issues/20)) ([6a2eb76](https://github.com/rancher/terraform-github-rke2-download/commit/6a2eb76a84a75bef52580e9071ef6dd97e953fd3))
+* supply chain vulnerabilities ([#21](https://github.com/rancher/terraform-github-rke2-download/issues/21)) ([09e19e8](https://github.com/rancher/terraform-github-rke2-download/commit/09e19e83ee619d3a22dac36dd5358e4941f151c0))
+
 ## [1.0.0](https://github.com/rancher/terraform-github-rke2-download/compare/v0.1.2...v1.0.0) (2025-03-08)
 
 
