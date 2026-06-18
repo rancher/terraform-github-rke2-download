@@ -4,18 +4,18 @@ import (
 	"context"
 	"fmt"
 	"os"
-  "path/filepath"
+	"path/filepath"
 	"testing"
 
 	"github.com/google/go-github/v53/github"
+	g "github.com/gruntwork-io/terratest/modules/git"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
-  g "github.com/gruntwork-io/terratest/modules/git"
 )
 
 func Teardown(t *testing.T, directory string) {
-  repoRoot, err0 := getRepoRoot(t)
-  require.NoError(t, err0)
+	repoRoot, err0 := getRepoRoot(t)
+	require.NoError(t, err0)
 	err := os.RemoveAll(fmt.Sprintf("%s/examples/%s/.terraform", repoRoot, directory))
 	require.NoError(t, err)
 	err2 := os.RemoveAll(fmt.Sprintf("%s/examples/%s/rke2", repoRoot, directory))
@@ -30,11 +30,11 @@ func Teardown(t *testing.T, directory string) {
 	require.NoError(t, err6)
 }
 
-func Setup(t *testing.T, directory string, terraformVars map[string]interface{}) *terraform.Options {
-  repoRoot, err0 := getRepoRoot(t)
-  require.NoError(t, err0)
+func Setup(t *testing.T, directory string, terraformVars map[string]any) *terraform.Options {
+	repoRoot, err0 := getRepoRoot(t)
+	require.NoError(t, err0)
 
-  retryableTerraformErrors := map[string]string{
+	retryableTerraformErrors := map[string]string{
 		// The reason is unknown, but eventually these succeed after a few retries.
 		".*unable to verify signature.*":             "Failed due to transient network error.",
 		".*unable to verify checksum.*":              "Failed due to transient network error.",
@@ -62,10 +62,10 @@ func GetLatestRelease(t *testing.T, owner string, repo string) string {
 }
 
 func getRepoRoot(t *testing.T) (string, error) {
-  gwd := g.GetRepoRoot(t)
-  fwd, err := filepath.Abs(gwd)
-  if err != nil {
-    return "", err
-  }
-  return fwd, nil
+	gwd := g.GetRepoRootContext(t, t.Context(), "")
+	fwd, err := filepath.Abs(gwd)
+	if err != nil {
+		return "", err
+	}
+	return fwd, nil
 }

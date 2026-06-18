@@ -17,18 +17,16 @@ module "download_latest" {
 
 | Name                              | Version         |
 | --------------------------------- | --------------- |
-| [terraform](#requirement\_terraform) | >= 1.1.0, < 1.6 |
+| [terraform](#requirement\_terraform) | >= 1.5.0, < 1.6 |
 | [github](#requirement\_github)       | >= 5.32.0       |
-| [local](#requirement\_local)         | >= 2.4.0        |
-| [null](#requirement\_null)           | >= 3.2.0        |
+| [file](#requirement\_file)           | >= 1.5.0        |
 
 ## Providers
 
 | Name                     | Version   |
 | ------------------------ | --------- |
 | [github](#provider\_github) | >= 5.32.0 |
-| [local](#provider\_local)   | >= 2.4.0  |
-| [null](#provider\_null)     | >= 3.2.0  |
+| [file](#provider\_file)     | >= 1.5.0  |
 
 ## Modules
 
@@ -38,8 +36,9 @@ No modules.
 
 | Name                                                                                                                 | Type        |
 | -------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [local_file.download_dir](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)           | resource    |
-| [null_resource.download](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource)         | resource    |
+| [file_directory.download_dir](https://registry.terraform.io/providers/rancher/file/latest/docs/resources/directory)     | resource    |
+| [file_local.download_dir_readme](https://registry.terraform.io/providers/rancher/file/latest/docs/resources/local)      | resource    |
+| [terraform_data.download](https://developer.hashicorp.com/terraform/language/resources/terraform-data)                  | resource    |
 | [github_release.latest](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/release)   | data source |
 | [github_release.selected](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/release) | data source |
 
@@ -48,11 +47,8 @@ No modules.
 |              Name              | Description                                                                                                                                                                                                                                                                                                                                                                     | Type       | Default      | Required |
 | :-----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------ | :------: |
 |        [arch](#input\_arch)        | The architecture of the system to download for.`<br>`Valid values are amd64 (for any x86\_64), arm64, or s390x.                                                                                                                                                                                                                                                               | `string` | `"amd64"`  |    no    |
-|          [os](#input\_os)          | The OS to download RPMs for.`<br>`This is only used for RPM downloads.`<br>`This is ignored when rpm is false.                                                                                                                                                                                                                                                              | `string` | `"rhel"`   |    no    |
-| [os\_version](#input\_os\_version) | The version of RHEL to download RPMs for.`<br>`This is only used for RPM downloads.`<br>`This is ignored when rpm is false.                                                                                                                                                                                                                                                 | `string` | `"8"`      |    no    |
-|        [path](#input\_path)        | The path to download the files to.`<br>`If not specified, the files will be downloaded to a directory named "rke2" in the root of the module.                                                                                                                                                                                                                                 | `string` | `"./rke2"` |    no    |
-|     [release](#input\_release)     | The value of the git tag associated with the release to find.`<br>`Specify "latest" to find the latest release (default).`<br>`When downloading RPMs, this must be a specific release, not "latest".                                                                                                                                                                        | `string` | `"latest"` |    no    |
-|         [rpm](#input\_rpm)         | Whether or not to download the RPMs.`<br>`Defaults to false.`<br>`This option requires that the system is linux (specifically RHEL based) and the architecture is amd64(x86\_64).`<br>`This option requires the computer running terraform to have curl installed.`<br>`When using this option, the "release" variable must be set to a specific release, not "latest". | `bool`   | `false`    |    no    |
+|        [path](#input\_path)        | The path to download the files to.`<br>`If not specified, the files will be downloaded to a directory named "rke2" in the root module.                                                                                                                                                                                                                                 | `string` | `"./rke2"` |    no    |
+|     [release](#input\_release)     | The value of the git tag associated with the release to find.`<br>`Specify "latest" to find the latest release (default).                                                                                                                                                                        | `string` | `"latest"` |    no    |
 |      [system](#input\_system)      | The kernel of the system to download for.`<br>`Valid values are currently just linux (the default).                                                                                                                                                                                                                                                                           | `string` | `"linux"`  |    no    |
 
 ## Outputs
