@@ -13,3 +13,4 @@ examples/*/tmp
 examples/*/rke2
 id_ed25519_*
 kubeconfig.yaml
+node_modules
