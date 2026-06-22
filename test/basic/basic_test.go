@@ -4,20 +4,20 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
-  util "github.com/rancher/terraform-github-rke2-install/test/tests"
+	util "github.com/rancher/terraform-github-rke2-download/test"
 )
 
 func TestBasic(t *testing.T) {
 	t.Parallel()
 	directory := "basic"
 	// release := getLatestRelease(t, "rancher", "rke2")
-	// terraformVars := map[string]interface{}{
+	// terraformVars := map[string]any{
 	// 	"release": release,
 	// }
-	terraformVars := map[string]interface{}{}
+	terraformVars := map[string]any{}
 	terraformOptions := util.Setup(t, directory, terraformVars)
 
 	defer util.Teardown(t, directory)
-	defer terraform.Destroy(t, terraformOptions)
-	terraform.InitAndApply(t, terraformOptions)
+	defer terraform.DestroyContext(t, t.Context(), terraformOptions)
+	terraform.InitAndApplyContext(t, t.Context(), terraformOptions)
 }

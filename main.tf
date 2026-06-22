@@ -1,12 +1,13 @@
 locals {
-  system      = var.system
-  arch        = var.arch
-  release     = var.release
-  latest      = (var.release == "latest" ? true : false)
-  latest_url  = "https://raw.githubusercontent.com/rancher/rke2/master/install.sh"
-  release_url = "https://raw.githubusercontent.com/rancher/rke2/refs/tags/${urlencode(local.release)}/install.sh"
-  install_url = local.latest ? local.latest_url : local.release_url
-  path        = abspath(var.path)
+  system       = var.system
+  arch         = var.arch
+  release      = var.release
+  latest       = (var.release == "latest" ? true : false)
+  latest_url   = "https://raw.githubusercontent.com/rancher/rke2/master/install.sh"
+  release_url  = "https://raw.githubusercontent.com/rancher/rke2/refs/tags/${urlencode(local.release)}/install.sh"
+  install_url  = local.latest ? local.latest_url : local.release_url
+  path         = var.path
+  default_path = (local.path == "./rke2" ? true : false)
 
   selected_assets = (can(data.github_release.selected[0].assets) ? { for a in data.github_release.selected[0].assets : a.name => a.browser_download_url } : {})
   latest_assets   = (can(data.github_release.latest.assets) ? { for a in data.github_release.latest.assets : a.name => a.browser_download_url } : {})
@@ -34,19 +35,26 @@ data "github_release" "latest" {
   retrieve_by = "latest"
 }
 
-# create a directory to download the files to if path does not exist
-resource "local_file" "download_dir" {
+# create a directory to download the files to if using the default ./rke2 path
+resource "file_local_directory" "download_dir" {
+  count       = local.default_path ? 1 : 0
+  path        = local.path
+  permissions = "0755"
+}
+
+resource "file_local" "download_dir_readme" {
   depends_on = [
     data.github_release.latest,
     data.github_release.selected,
+    file_local_directory.download_dir,
   ]
-  filename             = "${local.path}/README.md"
-  content              = <<-EOT
+  directory   = local.path
+  name        = "README.md"
+  contents    = <<-EOT
     # RKE2 Downloads
     This directory is used to download the RKE2 installer and images.
   EOT
-  directory_permission = "0755"
-  file_permission      = "0644"
+  permissions = "0644"
 }
 
 # requires curl to be installed in the environment running terraform
@@ -54,14 +62,14 @@ resource "terraform_data" "download" {
   depends_on = [
     data.github_release.selected,
     data.github_release.latest,
-    local_file.download_dir,
+    file_local.download_dir_readme,
   ]
   for_each         = local.files
   triggers_replace = each.value
   provisioner "local-exec" {
     command = <<-EOT
       # we are only downloading here and the checksum is downloaded as well
-      curl --clobber -L -s -o ${"${local.path}/${each.key}"} ${each.value}
+      curl --clobber -L -s -o "${local.path}/${each.key}" "${each.value}"
     EOT
   }
 }

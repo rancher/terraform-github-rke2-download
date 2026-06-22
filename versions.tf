@@ -5,13 +5,9 @@ terraform {
       source  = "integrations/github"
       version = ">= 5.32.0"
     }
-    local = {
-      source  = "hashicorp/local"
-      version = ">= 2.5"
-    }
-    null = {
-      source  = "hashicorp/null"
-      version = ">= 3.2.0"
+    file = {
+      source  = "rancher/file"
+      version = ">= 1.5.0"
     }
   }
 }
