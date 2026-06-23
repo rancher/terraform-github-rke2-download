@@ -126,10 +126,22 @@ When acting as an AI assistant executing these instructions, follow each phase t
         ```yaml
         version: 2
         updates:
-          - package-ecosystem: "docker"
-            directory: "/.github/workflows"
+          # Check for updates to GitHub Actions every week
+          - package-ecosystem: "github-actions"
+            directory: "/"
             schedule:
               interval: "weekly"
+              day: "sunday" # this way it is ready for review on Monday
+            commit-message:
+              prefix: "fix"
+          # Check for updates to terraform providers every week
+          - package-ecosystem: "terraform"
+            directory: "/"
+            schedule:
+              interval: "weekly"
+              day: "sunday" # this way it is ready for review on Monday
+            commit-message:
+              prefix: "fix"
         ```
 
 2.  **Workflow Security & Standardization (`.github/workflows/*.yaml`)**:
