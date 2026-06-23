@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.2](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.1...v1.0.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* bump actions checkout from v6.0.3 to v7.0.0 ([360d5ca](https://github.com/rancher/terraform-github-rke2-download/commit/360d5ca4059be5cd0267066f88b52babcc84203c))
+* Repository Update & Standardization ([#23](https://github.com/rancher/terraform-github-rke2-download/issues/23)) ([3fcaf38](https://github.com/rancher/terraform-github-rke2-download/commit/3fcaf3838f2cbd6ef9b725f74905ffbb9f67e8fe))
+* resolve dependabot issue ([#25](https://github.com/rancher/terraform-github-rke2-download/issues/25)) ([11d21a6](https://github.com/rancher/terraform-github-rke2-download/commit/11d21a6069f936fcf0d315d468eac3bd29dc17a8))
+
 ## [1.0.1](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.0...v1.0.1) (2026-04-15)
 
 
