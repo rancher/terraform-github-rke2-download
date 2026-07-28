@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.2...v1.0.3) (2026-07-27)
+
+
+### Bug Fixes
+
+* bump actions/checkout from 7.0.0 to 7.0.1 ([#28](https://github.com/rancher/terraform-github-rke2-download/issues/28)) ([994bb52](https://github.com/rancher/terraform-github-rke2-download/commit/994bb52ad9ea9e611e9abbf18724ee08aaabb8b8))
+
 ## [1.0.2](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.1...v1.0.2) (2026-07-07)
 
 
