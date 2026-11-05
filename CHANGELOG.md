@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.3...v1.0.4) (2026-11-05)
+
+
+### Bug Fixes
+
+* bump rancher-eio/read-vault-secrets from 7282bf97898cd1c16c89f837e0bb442e6d384c89 to dfae8acd43a9e170fca5f90168da22f814fe4e9a ([#30](https://github.com/rancher/terraform-github-rke2-download/issues/30)) ([601f131](https://github.com/rancher/terraform-github-rke2-download/commit/601f131aa0912696ca09207b488e8cc47db42f51))
+* bump rancher-eio/read-vault-secrets from dfae8acd43a9e170fca5f90168da22f814fe4e9a to 4c8f4e741954651c502bb7739c46ae1bad26b44d ([#32](https://github.com/rancher/terraform-github-rke2-download/issues/32)) ([f5fdbac](https://github.com/rancher/terraform-github-rke2-download/commit/f5fdbacf11574bb843baf911f8a91ddbdd6a99de))
+
 ## [1.0.3](https://github.com/rancher/terraform-github-rke2-download/compare/v1.0.2...v1.0.3) (2026-07-27)
 
 
